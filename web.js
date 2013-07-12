@@ -2,9 +2,24 @@ var express = require('express');
 
 var app = express.createServer(express.logger());
 
-app.get('/', function(request, response) {
-  response.send('Hello World2!');
+
+fs = require('fs');
+buf = new Buffer(256);
+fs.readFileSync('index.html', 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+//  console.log(data);
+buff=data;
 });
+
+
+
+app.get('/', function(request, response) {
+//  response.send( buf.toString('utf8', 0, buff)  );
+  response.send("Hello World2.2!");
+});
+
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
